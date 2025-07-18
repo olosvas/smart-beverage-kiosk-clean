@@ -118,8 +118,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Recent Changes (July 2025)
 
-- Added CORS middleware with specific Raspberry Pi IP range support
-- Implemented cross-origin request handling for production API access
-- Created automated Raspberry Pi deployment scripts
-- Configured Vite build process for external API URL injection
-- Successfully deployed and tested Pi-to-production communication
+- **Code Cleanup & Optimization**: Complete revision and cleanup of codebase
+- **Deployment Streamlining**: Removed redundant deployment scripts, kept only essential setup
+- **CORS Implementation**: Added middleware with specific Raspberry Pi IP range support
+- **Cross-Origin Architecture**: Implemented production API access for Pi-to-cloud communication
+- **Automated Deployment**: Created single, comprehensive Raspberry Pi setup script
+- **Build Optimization**: Configured Vite for external API URL injection during build
+- **Production Testing**: Successfully deployed and verified Pi-to-production communication
+- **Documentation**: Added comprehensive code structure documentation
