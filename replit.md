@@ -126,3 +126,12 @@ Preferred communication style: Simple, everyday language.
 - **Build Optimization**: Configured Vite for external API URL injection during build
 - **Production Testing**: Successfully deployed and verified Pi-to-production communication
 - **Documentation**: Added comprehensive code structure documentation
+
+#### Security & Functionality Enhancements (July 18, 2025)
+- **Authentication System**: Implemented admin login system with password protection
+- **Admin Route Security**: Protected admin routes from kiosk interface access
+- **Visual Differentiation**: Admin interface uses dark theme to distinguish from kiosk
+- **Glass Size Limits**: Implemented 0.5L maximum volume per cup with multi-cup dispensing
+- **Cup Management**: Added cup supply tracking and multi-cup order handling
+- **Hardware Integration**: Enhanced hardware service with cup detection and dispensing logic
+- **UI Improvements**: Added cup warnings in cart and dispensing progress indicators
