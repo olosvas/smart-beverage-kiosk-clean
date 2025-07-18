@@ -19,13 +19,15 @@ DATABASE_URL=postgresql://neondb_owner:npg_x4izKw3sGULf@ep-green-queen-a2ysqaa6-
 EOF
 
 # 3. Načítať environment variables
-export NODE_ENV=production
+export NODE_ENV=productionec
 export VITE_API_URL=https://smart-beverage-dispenser-uzisinapoj.replit.app
 export PORT=3000
 export HARDWARE_MODE=production
 
 # 4. Rebuild frontend s produkčným API URL
 echo "🔨 Building frontend s produkčným API..."
+# Vite potrebuje env variables počas build procesu
+export VITE_API_URL=https://smart-beverage-dispenser-uzisinapoj.replit.app
 npm run build
 
 # 5. Vytvoriť jednoduché ecosystem.config.cjs pre Pi
