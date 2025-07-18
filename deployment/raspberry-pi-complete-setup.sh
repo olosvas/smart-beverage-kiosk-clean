@@ -8,12 +8,15 @@ echo "🔧 Nastavujem Smart Beverage Kiosk na Raspberry Pi..."
 # Vytvor .env.production súbor
 echo "📝 Vytváram .env.production súbor..."
 cat > .env.production << 'EOF'
-NODE_ENV=production
+NODE_ENV=development
 DATABASE_URL=postgresql://neondb_owner:npg_x4izKw3sGULf@ep-green-queen-a2ysqaa6-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 PORT=3000
 HARDWARE_MODE=production
 SESSION_SECRET=raspberry-pi-kiosk-secret-2025
 EOF
+
+# POZNÁMKA: Používame NODE_ENV=development aby API endpointy fungovali
+# HARDWARE_MODE=production zabezpečuje použitie reálnych GPIO pinov
 
 # Vytvor ecosystem.config.js pre PM2
 echo "📝 Vytváram PM2 konfiguráciu..."
@@ -88,7 +91,7 @@ pm2 delete beverage-kiosk 2>/dev/null || true
 
 # Spustiť aplikáciu
 echo "🚀 Spúšťam aplikáciu..."
-pm2 start ecosystem.config.js --env production
+pm2 start ecosystem.config.js --env development
 
 # Uložiť PM2 konfiguráciu
 pm2 save
