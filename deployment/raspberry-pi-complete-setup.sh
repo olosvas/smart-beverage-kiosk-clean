@@ -18,9 +18,9 @@ EOF
 # POZNÁMKA: Používame NODE_ENV=development aby API endpointy fungovali
 # HARDWARE_MODE=production zabezpečuje použitie reálnych GPIO pinov
 
-# Vytvor ecosystem.config.js pre PM2
+# Vytvor ecosystem.config.cjs pre PM2
 echo "📝 Vytváram PM2 konfiguráciu..."
-cat > ecosystem.config.js << 'EOF'
+cat > ecosystem.config.cjs << 'EOF'
 module.exports = {
   apps: [{
     name: 'beverage-kiosk',
@@ -91,7 +91,7 @@ pm2 delete beverage-kiosk 2>/dev/null || true
 
 # Spustiť aplikáciu
 echo "🚀 Spúšťam aplikáciu..."
-pm2 start ecosystem.config.js --env development
+pm2 start ecosystem.config.cjs --env development
 
 # Uložiť PM2 konfiguráciu
 pm2 save

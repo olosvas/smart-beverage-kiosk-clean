@@ -129,7 +129,7 @@ mkdir -p logs
 
 # 9. Spustiť aplikáciu
 echo "9. Spúšťam aplikáciu..."
-pm2 start ecosystem.config.js --env development
+pm2 start ecosystem.config.cjs --env development
 
 # 10. Počkať na spustenie
 echo "10. Čakám na spustenie aplikácie..."
