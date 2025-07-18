@@ -4,12 +4,14 @@
 
 This is a multilingual beverage-dispensing kiosk system designed for a Raspberry Pi 4B with a 7" touch display. The system provides a touchscreen interface for beverage selection and dispensing, with comprehensive admin management capabilities. It's built as a modern web application with both customer-facing kiosk functionality and administrative controls.
 
-**Current Status:** Fully operational and tested (January 2025)
+**Current Status:** Production deployed with Raspberry Pi integration (July 2025)
 - Complete kiosk interface with touch-optimized controls
 - Working admin dashboard with real-time order management
 - Database integration with PostgreSQL
 - Hardware simulation with configurable GPIO pins
 - WebSocket communication for live updates
+- CORS-enabled production API for Raspberry Pi cross-origin requests
+- Automated Raspberry Pi deployment scripts
 
 ## User Preferences
 
@@ -111,3 +113,13 @@ Preferred communication style: Simple, everyday language.
 4. **Real-time Admin**: WebSocket integration for live system monitoring
 5. **Modular Services**: Separated concerns for easier testing and maintenance
 6. **Hardware Abstraction**: Service layer allows for easy hardware simulation and testing
+7. **Cross-Origin Architecture**: Raspberry Pi kiosk calls production API with CORS support
+8. **Environment-Specific Builds**: Vite configured for production API URLs on Pi deployment
+
+### Recent Changes (July 2025)
+
+- Added CORS middleware with specific Raspberry Pi IP range support
+- Implemented cross-origin request handling for production API access
+- Created automated Raspberry Pi deployment scripts
+- Configured Vite build process for external API URL injection
+- Successfully deployed and tested Pi-to-production communication
