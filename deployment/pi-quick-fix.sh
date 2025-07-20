@@ -4,7 +4,7 @@
 echo "🔧 Raspberry Pi Kiosk Quick Fix"
 echo "==============================="
 
-cd /home/pi/kiosk-app
+cd /home/oliver/kiosk-app
 
 echo "📊 Current PM2 Status:"
 pm2 list

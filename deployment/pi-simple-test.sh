@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Simple Port Test for Raspberry Pi
+cd /home/oliver/kiosk-app
 echo "🧪 Simple Port Test"
 echo "=================="
 

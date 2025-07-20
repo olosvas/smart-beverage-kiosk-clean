@@ -4,7 +4,7 @@
 echo "📝 Creating missing PM2 configuration files"
 echo "==========================================="
 
-cd /home/pi/kiosk-app || {
+cd /home/oliver/kiosk-app || {
     echo "❌ App directory not found"
     exit 1
 }
@@ -16,7 +16,7 @@ module.exports = {
     name: 'kiosk-app',
     script: 'npm',
     args: 'start',
-    cwd: '/home/pi/kiosk-app',
+    cwd: '/home/oliver/kiosk-app',
     env: {
       NODE_ENV: 'production',
       HARDWARE_MODE: 'production'
@@ -24,9 +24,9 @@ module.exports = {
     restart_delay: 1000,
     max_restarts: 10,
     min_uptime: '10s',
-    error_file: '/home/pi/.pm2/logs/kiosk-app-error.log',
-    out_file: '/home/pi/.pm2/logs/kiosk-app-out.log',
-    log_file: '/home/pi/.pm2/logs/kiosk-app.log'
+    error_file: '/home/oliver/.pm2/logs/kiosk-app-error.log',
+    out_file: '/home/oliver/.pm2/logs/kiosk-app-out.log',
+    log_file: '/home/oliver/.pm2/logs/kiosk-app.log'
   }]
 };
 EOF
