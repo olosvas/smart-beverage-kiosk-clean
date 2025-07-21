@@ -13,11 +13,7 @@ module.exports = {
     watch: false,
     max_memory_restart: '256M',
     exec_mode: 'fork',
-    // Add Node options to handle path resolution issues
-    node_args: ['--experimental-specifier-resolution=node'],
-    // Set working directory explicitly
     cwd: '/home/oliver/kiosk-app',
-    // Redirect output to see what's happening
     out_file: './logs/out.log',
     error_file: './logs/err.log',
     log_file: './logs/combined.log'
