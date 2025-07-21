@@ -15,8 +15,6 @@ interface DispensingProps {
 interface DispensingItem extends CartItem {
   status: 'pending' | 'dispensing' | 'completed';
   progress: number;
-  cupsNeeded: number;
-  currentCup: number;
 }
 
 export default function Dispensing({ items, onComplete }: DispensingProps) {
@@ -27,13 +25,11 @@ export default function Dispensing({ items, onComplete }: DispensingProps) {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Initialize dispensing items with cup calculations
+    // Initialize dispensing items
     const initialItems = items.map(item => ({
       ...item,
       status: 'pending' as const,
-      progress: 0,
-      cupsNeeded: Math.ceil(item.volume / 0.5), // Max 0.5L per cup
-      currentCup: 0
+      progress: 0
     }));
     setDispensingItems(initialItems);
     
@@ -104,67 +100,32 @@ export default function Dispensing({ items, onComplete }: DispensingProps) {
 
   const dispenseItem = async (itemIndex: number) => {
     return new Promise<void>((resolve) => {
-      const item = dispensingItems[itemIndex];
-      
       // Update status to dispensing
       setDispensingItems(prev => 
-        prev.map((dispItem, index) => 
+        prev.map((item, index) => 
           index === itemIndex 
-            ? { ...dispItem, status: 'dispensing', progress: 0, currentCup: 1 }
-            : dispItem
+            ? { ...item, status: 'dispensing', progress: 0 }
+            : item
         )
       );
       
-      let currentCup = 1;
-      
-      const processNextCup = () => {
-        // Update current cup
-        setDispensingItems(prev => 
-          prev.map((dispItem, index) => 
-            index === itemIndex 
-              ? { ...dispItem, currentCup }
-              : dispItem
-          )
-        );
-        
-        // Simulate cup placement wait and dispensing
-        const cupProgress = ((currentCup - 1) / item.cupsNeeded) * 100;
-        const nextCupProgress = (currentCup / item.cupsNeeded) * 100;
-        let progress = cupProgress;
-        
-        const interval = setInterval(() => {
-          progress += 5;
+      // Simulate dispensing progress
+      const interval = setInterval(() => {
+        setDispensingItems(prev => {
+          const newItems = [...prev];
+          const item = newItems[itemIndex];
           
-          setDispensingItems(prev => 
-            prev.map((dispItem, index) => 
-              index === itemIndex 
-                ? { ...dispItem, progress: Math.min(progress, nextCupProgress) }
-                : dispItem
-            )
-          );
-          
-          if (progress >= nextCupProgress) {
+          if (item.progress < 100) {
+            item.progress += 10;
+          } else {
+            item.status = 'completed';
             clearInterval(interval);
-            
-            if (currentCup < item.cupsNeeded) {
-              currentCup++;
-              setTimeout(processNextCup, 1000); // Wait between cups
-            } else {
-              // Complete dispensing
-              setDispensingItems(prev => 
-                prev.map((dispItem, index) => 
-                  index === itemIndex 
-                    ? { ...dispItem, status: 'completed', progress: 100 }
-                    : dispItem
-                )
-              );
-              resolve();
-            }
+            resolve();
           }
-        }, 200);
-      };
-      
-      processNextCup();
+          
+          return newItems;
+        });
+      }, 300);
     });
   };
 
@@ -196,28 +157,16 @@ export default function Dispensing({ items, onComplete }: DispensingProps) {
             <div className="space-y-4">
               {dispensingItems.map((item, index) => (
                 <div key={item.id} className="space-y-2">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <span className="font-medium text-gray-800">
-                        {item.name} ({formatVolume(item.volume)})
-                      </span>
-                      {item.cupsNeeded > 1 && (
-                        <div className="text-xs text-orange-600 mt-1">
-                          Requires {item.cupsNeeded} cups
-                        </div>
-                      )}
-                      {item.status === 'dispensing' && item.cupsNeeded > 1 && (
-                        <div className="text-xs text-blue-600 mt-1">
-                          Dispensing cup {item.currentCup} of {item.cupsNeeded}
-                        </div>
-                      )}
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-800">
+                      {item.name} ({formatVolume(item.volume)})
+                    </span>
                     <span className={`text-sm font-semibold ${
                       item.status === 'completed' ? 'text-green-600' : 
                       item.status === 'dispensing' ? 'text-primary' : 'text-gray-500'
                     }`}>
                       {item.status === 'completed' ? '100%' : 
-                       item.status === 'dispensing' ? `${Math.round(item.progress)}%` : 'Pending'}
+                       item.status === 'dispensing' ? `${item.progress}%` : 'Pending'}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">

@@ -58,14 +58,15 @@ export default function KioskPage() {
               <span className="text-sm">{t('system_online')}</span>
             </div>
             <LanguageToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/20 hidden"
-              disabled
-            >
-              <Settings className="h-5 w-5" />
-            </Button>
+            <Link href="/admin">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-white/20"
+              >
+                <Settings className="h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
 
