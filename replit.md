@@ -118,8 +118,14 @@ Preferred communication style: Simple, everyday language.
 
 ### Recent Changes (July 2025)
 
-- Added CORS middleware with specific Raspberry Pi IP range support
-- Implemented cross-origin request handling for production API access
-- Created automated Raspberry Pi deployment scripts
-- Configured Vite build process for external API URL injection
-- Successfully deployed and tested Pi-to-production communication
+- **July 21, 2025**: Major cleanup and final working configuration
+  - Cleaned up 18+ redundant deployment scripts to single working configuration
+  - Fixed critical configuration: NODE_ENV=development + HARDWARE_MODE=production
+  - Corrected build path from dist/server/index.js to dist/index.js
+  - Created clean project structure ready for new repository
+  - Working ecosystem.config.cjs with proper environment variables
+
+- Previous changes:
+  - Added CORS middleware with specific Raspberry Pi IP range support
+  - Implemented cross-origin request handling for production API access
+  - Successfully deployed and tested Pi-to-production communication
